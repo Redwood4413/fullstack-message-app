@@ -1,0 +1,22 @@
+{
+  "name": "@message-app/shared-schemas",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "scripts": {
+    "generate": "prisma generate",
+    "generate-zod": "prisma generate zod"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@message-app/config": "workspace:*",
+    "@prisma/client": "^6.11.1",
+    "prisma": "^6.11.1",
+    "zod": "^4.0.5",
+    "zod-prisma-types": "^3.2.4"
+  }
+}
