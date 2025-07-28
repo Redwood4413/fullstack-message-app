@@ -2,7 +2,6 @@ import { globalIgnores } from 'eslint/config'
 import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import pluginVue from 'eslint-plugin-vue'
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
-import eslintrcImport from './.eslintrc-auto-import.json' assert { type: 'json' }
 
 // To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
 import { configureVueProject } from '@vue/eslint-config-typescript'
@@ -11,11 +10,13 @@ configureVueProject({ scriptLangs: ['ts', 'tsx'] })
 
 export default defineConfigWithVueTs(
   {
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: '../../',
+      },
+    },
     name: 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],
-    languageOptions: {
-      ...eslintrcImport,
-    },
   },
   globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
 
