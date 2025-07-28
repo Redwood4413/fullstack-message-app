@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [],
+  "files": [],
+  //
+  "compilerOptions": {
+    // Environment setup & latest features
+    "lib": [
+      "ESNext"
+    ],
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "auto",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    // Bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    // Best practices
+    "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    // Some stricter flags (disabled by default)
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": [],
+    "baseUrl": ".",
+    "composite": true,
+  },
+  "references": [
+    {
+      "path": "./apps/web/"
+    },
+    {
+      "path": "./apps/server/"
+    }
+  ],
+}
