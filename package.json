@@ -1,6 +1,6 @@
 {
   "name": "message-app",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "devDependencies": {
     "@eslint/compat": "^1.3.1",
     "@eslint/css": "^0.10.0",
@@ -27,16 +27,20 @@
   "private": true,
   "scripts": {
     "dev:web": "cd apps/web && bun dev",
-    "dev:server": "cd apps/server && bun start",
+    "dev:server": "cd apps/server && bun start:dev",
     "dev": "bun dev:web && bun dev:server",
-    "build:web": "cd apps/web bun build",
-    "build:server": "cd apps/server bun build",
+    "build:web": "cd apps/web && bun build",
+    "build:server": "cd apps/server && bun build",
     "build": "bun build:web && bun build:server",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prisma-generate": ""
+    "prisma-generate": "cd packages/schemas/src && bun generate",
+    "prisma-generate-zod": "cd packages/schema/src && bun generate-zod"
   },
   "trustedDependencies": [
+    "@nestjs/core",
+    "@prisma/client",
     "@prisma/engines",
+    "@swc/core",
     "esbuild",
     "prisma",
     "unrs-resolver"
