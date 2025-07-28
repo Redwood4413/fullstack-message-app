@@ -4,7 +4,7 @@ import tseslint from 'typescript-eslint'
 import pluginVue from 'eslint-plugin-vue'
 import json from '@eslint/json'
 import css from '@eslint/css'
-import { defineConfig } from 'eslint/config'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import stylistic from '@stylistic/eslint-plugin'
 
@@ -38,6 +38,9 @@ export default defineConfig([
     language: 'css/css',
     extends: ['css/recommended'],
   },
+  globalIgnores([
+    "**/generated"
+  ]),
   eslintPluginPrettierRecommended,
   {
     plugins: {
