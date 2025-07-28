@@ -25,6 +25,7 @@ app.use(Quasar, {
       secondary: '#711985',
       accent: '#da3ea6',
       dark: '#040f16',
+      negative: '#ff2222',
     },
   },
 })
