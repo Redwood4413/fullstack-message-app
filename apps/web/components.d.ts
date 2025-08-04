@@ -8,16 +8,19 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
-    IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
-    IconEcosystem: typeof import('./src/components/icons/IconEcosystem.vue')['default']
-    IconSupport: typeof import('./src/components/icons/IconSupport.vue')['default']
-    IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
+    AboutView: typeof import('./src/views/AboutView.vue')['default']
+    App: typeof import('./src/App.vue')['default']
+    BaseInput: typeof import('./src/components/ui/BaseInput.vue')['default']
+    BaseSeparator: typeof import('./src/components/ui/BaseSeparator.vue')['default']
+    ContinueWith: typeof import('./src/components/ContinueWith.vue')['default']
+    HomeView: typeof import('./src/views/HomeView.vue')['default']
     LoginForm: typeof import('./src/components/LoginForm.vue')['default']
-    NButton: typeof import('naive-ui')['NButton']
-    NCarousel: typeof import('naive-ui')['NCarousel']
+    MainView: typeof import('./src/views/MainView.vue')['default']
+    RegisterForm: typeof import('./src/components/RegisterForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    WelcomeHeader: typeof import('./src/components/WelcomeHeader.vue')['default']
     WelcomeItem: typeof import('./src/components/WelcomeItem.vue')['default']
+    WelcomeView: typeof import('./src/views/WelcomeView.vue')['default']
   }
 }

@@ -38,9 +38,7 @@ export default defineConfig([
     language: 'css/css',
     extends: ['css/recommended'],
   },
-  globalIgnores([
-    "**/generated"
-  ]),
+  globalIgnores(['**/generated']),
   eslintPluginPrettierRecommended,
   {
     plugins: {

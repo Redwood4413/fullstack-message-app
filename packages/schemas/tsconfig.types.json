@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist/types",
+    "noEmit": false,
+    "outDir": "./dist/types"
+  },
+  "include": [
+    "./"
+  ],
+  "exclude": [
+    "./prisma/generated/client/**/*.js",
+    "./prisma/generated/client/**/*.mjs",
+  ]
+}

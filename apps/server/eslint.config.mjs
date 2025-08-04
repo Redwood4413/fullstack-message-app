@@ -3,6 +3,7 @@ import eslint from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import eslintNestJs from "@darraghor/eslint-plugin-nestjs-typed";
 
 export default tseslint.config(
   {
@@ -24,6 +25,7 @@ export default tseslint.config(
       },
     },
   },
+  eslintNestJs.configs.flatRecommended,
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',

@@ -1,6 +1,10 @@
-import { PrismaClient } from '@prisma/client/scripts/default-index.js'
+import 'dotenv/config'
 import { withAccelerate } from '@prisma/extension-accelerate'
+import { PrismaPg } from '@prisma/adapter-pg'
+import { PrismaClient } from './generated/client'
 
-const prisma = new PrismaClient().$extends(withAccelerate())
+const connectionString = `${process.env.DATABASE_URL}`
+const adapter = new PrismaPg({ connectionString })
+const prisma = new PrismaClient({ adapter }).$extends(withAccelerate())
 
 export default prisma

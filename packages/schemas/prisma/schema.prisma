@@ -4,8 +4,9 @@ generator yup {
 }
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/client"
+  provider        = "prisma-client-js"
+  output          = "./generated/client"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
@@ -14,28 +15,28 @@ datasource db {
 }
 
 model User {
-  id            Int            @id @default(autoincrement())
+  id            String         @id @default(nanoid())
   email         String         @unique
   name          String         @db.VarChar(255)
   password      String
   notifications Notification[]
   chatRooms     ChatRoom[]
-  lastSeen      DateTime
-  createdAt     DateTime
+  lastSeen      DateTime       @default(now())
+  createdAt     DateTime       @default(now())
 }
 
 model ChatRoom {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(nanoid())
   name      String?  @db.VarChar(255)
   users     User[]
   createdAt DateTime
 }
 
 model Notification {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(nanoid())
   message   String
   isRead    Boolean  @default(false)
   user      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
+  userId    String?
   createdAt DateTime
 }

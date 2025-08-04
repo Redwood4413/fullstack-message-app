@@ -1,5 +1,6 @@
 import { UserSchema as BaseSchema } from '../../prisma/generated/zod'
 import * as z from 'zod'
+
 const registerSchema = z.object({
   ...BaseSchema.shape,
   email: z.email({ error: 'Incorrect email.' }).max(255),

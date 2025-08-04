@@ -10,6 +10,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 
 // https://vite.dev/config/
 export default defineConfig({
+  server: {},
   plugins: [
     vue({
       template: { transformAssetUrls },

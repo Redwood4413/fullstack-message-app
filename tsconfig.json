@@ -11,6 +11,12 @@
     "lib": [
       "ESNext"
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@message-app/schemas": [
+        "packages/schemas"
+      ]
+    },
     "target": "ESNext",
     "module": "Preserve",
     "moduleDetection": "auto",
@@ -34,7 +40,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "types": [],
-    "baseUrl": ".",
     "composite": true,
   },
   "references": [
