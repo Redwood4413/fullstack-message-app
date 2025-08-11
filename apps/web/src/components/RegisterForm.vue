@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref, useTemplateRef } from 'vue'
 import { useRegleSchema } from '@regle/schemas'
-import { registerSchema } from '@message-app/schemas/zod/user'
 import { useFocus } from '@vueuse/core'
 import { type QInput, type QInputNativeElement } from 'quasar'
+import { registerSchema } from '@server/validation/user'
 
 const form = ref({
   email: '',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { loginSchema } from '@message-app/schemas/zod/user'
+import { loginSchema } from '@server/validation/user'
 import { useRegleSchema } from '@regle/schemas'
 import { useFocus } from '@vueuse/core'
 import type { QInput, QInputNativeElement } from 'quasar'
@@ -10,6 +10,7 @@ const form = ref({
   password: '',
   isSelected: false,
 })
+
 const { r$ } = useRegleSchema(form, loginSchema)
 
 const inputRef = useTemplateRef<QInput>('inputRef')
