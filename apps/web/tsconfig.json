@@ -9,6 +9,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@server/validation/*": [
+        "../server/public/validation/*"
       ]
     },
     "target": "ESNext",
@@ -31,6 +34,7 @@
     "noPropertyAccessFromIndexSignature": false
   },
   "include": [
-    "components.d.ts"
+    "components.d.ts",
+    "src/**/*"
   ]
 }

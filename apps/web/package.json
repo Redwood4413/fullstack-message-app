@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@message-app/web",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -13,7 +13,6 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@message-app/schemas": "workspace:*",
     "@quasar/extras": "^1.17.0",
     "@regle/core": "^1.6.0",
     "@regle/rules": "^1.6.0",
@@ -21,6 +20,7 @@
     "@vueuse/core": "^13.5.0",
     "pinia": "^3.0.1",
     "quasar": "^2.18.1",
+    "vite-tsconfig-paths": "^5.1.4",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
