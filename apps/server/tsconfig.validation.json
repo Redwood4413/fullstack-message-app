@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "public",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "rootDir": "./",
+    "declaration": true,
+    "emitDeclarationOnly": false
+  },
+  "include": [
+    "./prisma/generated/**/*",
+    "./validation/**/*"
+  ]
+}
