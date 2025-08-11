@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { User } from '@message-app/server';
 import { Prisma } from '../../prisma';
 import { PrismaService } from '../prisma/prisma.service';
-import { nanoid } from 'nanoid';
 
 @Injectable()
 export class UserService {
