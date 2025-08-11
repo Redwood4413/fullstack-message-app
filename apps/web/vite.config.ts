@@ -1,13 +1,12 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
-import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 import Icons from 'unplugin-icons/vite'
 import Components from 'unplugin-vue-components/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-
+import tsconfigPaths from 'vite-tsconfig-paths'
 // https://vite.dev/config/
 export default defineConfig({
   server: {},
@@ -15,6 +14,7 @@ export default defineConfig({
     vue({
       template: { transformAssetUrls },
     }),
+    tsconfigPaths(),
     vueDevTools(),
     quasar({
       autoImportComponentCase: 'pascal',
@@ -28,9 +28,4 @@ export default defineConfig({
     }),
     Icons({}),
   ],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, './src/'),
-    },
-  },
 })
