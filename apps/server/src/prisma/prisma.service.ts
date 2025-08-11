@@ -1,11 +1,9 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { PrismaClient } from '@message-app/schemas';
+import { PrismaClient } from '../../prisma/generated/client';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
-  // [x: string]: any;
   async onModuleInit() {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     await this.$connect();
   }
 }

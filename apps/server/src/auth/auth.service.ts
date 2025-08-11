@@ -1,19 +1,13 @@
-import { ConflictException, Injectable } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+} from '@nestjs/common';
+import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
-import { } from '@message-app/schemas';
-import { registerSchema } from '@message-app/schemas';
-
-//TODO: delete this shit
-interface User {
-  name: string;
-  id: string;
-  email: string;
-  password: string;
-  lastSeen: Date;
-  createdAt: Date;
-}
-
+import { registerSchema } from '../../validation';
+import { User } from 'prisma';
+import z from 'zod';
 @Injectable()
 export class AuthService {
   constructor(private userService: UserService) { }
@@ -27,15 +21,22 @@ export class AuthService {
     }
     return null;
   }
-  async signUp(input) {
-    console.log(registerSchema);
-    // const isValid = registerSchema.parse()
-
-    const isExists = await this.userService.user({ email: input.email });
-    if (isExists) {
-      throw new ConflictException('Email already in use.');
+  async signUp(input: z.input<typeof registerSchema>) {
+    try {
+      const data = registerSchema.parse(input);
+      if (!data) throw new BadRequestException();
+      const user = await this.userService.user({ email: data.email });
+      if (user) throw new ConflictException('Email already in use.');
+      const salt = await bcrypt.genSalt();
+      const { email, name, passwordForm } = data;
+      await this.userService.createUser({
+        email,
+        name,
+        password: await bcrypt.hash(passwordForm.password, salt),
+      });
+    } catch (error) {
+      console.log(error);
+      throw new BadRequestException(error);
     }
-
-    return await this.userService.createUser(input);
   }
 }
