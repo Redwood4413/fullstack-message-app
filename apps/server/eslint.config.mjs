@@ -28,9 +28,12 @@ export default tseslint.config(
   eslintNestJs.configs.flatRecommended,
   {
     rules: {
+      '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-floating-promises': 'warn',
-      '@typescript-eslint/no-unsafe-argument': 'warn'
+      '@typescript-eslint/no-unsafe-argument': 'warn',
+
+      '@darraghor/nestjs-typed/api-method-should-specify-api-response': 'off' // TODO: Configure swagger and remove this rule
     },
   },
 );
