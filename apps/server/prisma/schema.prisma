@@ -20,23 +20,92 @@ model User {
   name          String         @db.VarChar(255)
   password      String
   notifications Notification[]
-  chatRooms     ChatRoom[]
-  lastSeen      DateTime       @default(now())
-  createdAt     DateTime       @default(now())
+
+  refreshToken UserSession[]
+
+  owningRooms  ChatRoom[]        @relation("UserChatRoomRelation")
+  adminInRooms AdminOnChatRoom[] @relation("AdminUserRelation")
+
+  promotedAdmins AdminOnChatRoom[] @relation("PromotedByUserRelation")
+  addedUsers     UserOnChatRoom[]  @relation("AddedByUserRelation")
+  chatRooms      UserOnChatRoom[]  @relation("UserChatRoomRelation")
+
+  lastSeen  DateTime @default(now())
+  createdAt DateTime @default(now())
+}
+
+model UserSession {
+  deviceId    String
+  hashedToken String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  createdAt   DateTime @default(now())
+  expiresAt   DateTime
+  userAgent   String
+  revoked     Boolean  @default(false)
+
+  @@unique([userId, deviceId])
 }
 
 model ChatRoom {
-  id        String   @id @default(nanoid())
-  name      String?  @db.VarChar(255)
-  users     User[]
+  id          String  @id @default(nanoid())
+  title       String  @db.VarChar(255)
+  description String?
+
+  owner   User   @relation("UserChatRoomRelation", fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId String
+
+  admins AdminOnChatRoom[] @relation("AdminUserRelation")
+  users  UserOnChatRoom[]  @relation("UserChatRoomRelation")
+
+  messages Message[]
+
   createdAt DateTime @default(now())
+}
+
+model Message {
+  id         String         @id @default(nanoid())
+  body       String
+  chatRoom   ChatRoom       @relation(fields: [chatRoomId], references: [id], onDelete: Cascade)
+  chatRoomId String
+  sentBy     UserOnChatRoom @relation(fields: [userId, chatRoomId], references: [userId, chatRoomId], onDelete: SetNull)
+  userId     String
+
+  sentAt   DateTime  @default(now())
+  editedAt DateTime?
+}
+
+model AdminOnChatRoom {
+  admin        User     @relation("AdminUserRelation", fields: [adminId], references: [id], onDelete: Cascade)
+  adminId      String
+  chatRoom     ChatRoom @relation("AdminUserRelation", fields: [chatRoomId], references: [id], onDelete: Cascade)
+  chatRoomId   String
+  promotedAt   DateTime @default(now())
+  promotedBy   User?    @relation("PromotedByUserRelation", fields: [promotedById], references: [id], onDelete: SetNull)
+  promotedById String?
+
+  @@id([adminId, chatRoomId])
+}
+
+model UserOnChatRoom {
+  user       User     @relation("UserChatRoomRelation", fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  chatRoom   ChatRoom @relation("UserChatRoomRelation", fields: [chatRoomId], references: [id], onDelete: Cascade)
+  chatRoomId String
+
+  messages      Message[]
+  joinedAt      DateTime  @default(now())
+  addedBy       User?     @relation("AddedByUserRelation", fields: [addedByUserId], references: [id], onDelete: SetNull)
+  addedByUserId String?
+
+  @@id([userId, chatRoomId])
 }
 
 model Notification {
   id        String   @id @default(nanoid())
   message   String
   isRead    Boolean  @default(false)
-  user      User?    @relation(fields: [userId], references: [id])
-  userId    String?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
   createdAt DateTime @default(now())
 }

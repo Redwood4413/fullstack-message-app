@@ -1,25 +1,34 @@
-import './assets/main.css'
-import { createApp } from 'vue'
+import './assets/main.css';
+import { createApp } from 'vue';
 
-import { Quasar } from 'quasar'
-import quasarIconSet from 'quasar/icon-set/svg-material-icons'
-import '@quasar/extras/mdi-v7/mdi-v7.css'
-import '@quasar/extras/fontawesome-v6/fontawesome-v6.css'
-import 'quasar/src/css/index.sass'
+import { Quasar, Notify, Dialog } from 'quasar';
+import quasarIconSet from 'quasar/icon-set/svg-material-icons';
+import '@quasar/extras/mdi-v7/mdi-v7.css';
+import '@quasar/extras/fontawesome-v6/fontawesome-v6.css';
+import 'quasar/src/css/index.sass';
 
-import App from './App.vue'
-import router from './router'
-import { createPinia } from 'pinia'
+import App from './App.vue';
+import router from './router';
+import { createPinia } from 'pinia';
+import { VueQueryPlugin } from '@tanstack/vue-query';
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(createPinia())
-app.use(router)
+app.use(createPinia());
+app.use(router);
+app.use(VueQueryPlugin);
 app.use(Quasar, {
-  plugins: {},
+  plugins: { Notify, Dialog },
   iconSet: quasarIconSet,
+
   config: {
     dark: 'auto',
+
+    notify: {
+      position: 'top-right',
+      progress: true,
+      color: 'blue-13',
+    },
     brand: {
       primary: '#83c2e7',
       secondary: '#711985',
@@ -28,6 +37,6 @@ app.use(Quasar, {
       negative: '#ff2222',
     },
   },
-})
+});
 
-app.mount('#app')
+app.mount('#app');
